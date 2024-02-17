@@ -163,3 +163,9 @@ footer img {
     color: var(--gris-claro);
     cursor: pointer;
 }
+
+main p {
+    font-size: 18px;
+    color: var(--textos);
+    font-family: 'Roboto', sans-serif;
+}
