@@ -37,6 +37,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--fondo-pantalla);
+    min-height: 100%;
+    position: relative;
 }
 
 main {
@@ -94,7 +96,7 @@ main {
 .barra-menu {
     margin-left: 13px;
     margin-right: 13px;
-    padding-top: 20px;
+    padding-top: 5px;
     background-color: var(--fondo-Menu);
     width: 100%;
 }
@@ -107,7 +109,8 @@ main {
 footer {
     background-color: var(--fondo-Footer);
     position: absolute;
-    bottom: 0;      /* Lleva el footer abajo de la pagina */
+    bottom: 0;
+    /* Lleva el footer abajo de la pagina */
 }
 
 footer p {
@@ -118,4 +121,45 @@ footer p {
 footer img {
     width: 130px;
     margin-left: 10%;
+}
+
+/* Btn Paso y General */
+
+.btn-paso {
+    background-color: var(--magenta);
+    border-radius: 5px;
+    padding: 5px;
+    color: #FFF;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-generales {
+    background-color: var(--celeste);
+    border-radius: 5px;
+    padding: 5px;
+    color: #FFF;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-menu {
+    display: inline-block;
+    text-decoration: none;
+    width: 100px;
+    padding: 3px 25px;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: 10px;
+    margin: 5px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-menu:hover {
+    color: var(--gris-claro);
+    cursor: pointer;
 }

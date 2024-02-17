@@ -1,0 +1,27 @@
+#img-data {
+    width: 250px;
+    margin: 15px;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-paso-generales {
+    border-radius: 10px;
+    margin: 5%;
+    height: 200px;
+    width: 200px;
+    padding: 1rem;
+    display: flex; 
+    align-items: center; 
+    justify-content: left;
+    color: #FFF;
+    font-size: 28px;
+    text-decoration: none;
+}
