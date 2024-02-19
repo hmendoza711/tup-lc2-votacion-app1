@@ -37,8 +37,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--fondo-pantalla);
-    min-height: 100%;
-    position: relative;
 }
 
 main {
@@ -109,8 +107,6 @@ main {
 footer {
     background-color: var(--fondo-Footer);
     position: absolute;
-    bottom: 0;
-    /* Lleva el footer abajo de la pagina */
 }
 
 footer p {
@@ -168,4 +164,66 @@ main p {
     font-size: 18px;
     color: var(--textos);
     font-family: 'Roboto', sans-serif;
+}
+
+/* Barra Menu Paso y Generales btn  */
+
+.filtrar {
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 5px;
+    float: right;
+    text-decoration: none;
+    color: var(--textos);
+}
+
+.inicio {
+    background-color: var(--gris-claro);
+    border-radius: 5px;
+    padding: 5px;
+    color: #FFF;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.desplegado {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 30px;
+    width: 120px;
+    padding: 5px;
+    color: var(--celeste);
+    font-weight: bold;
+}
+
+/* Mensajes de alertas */
+
+.alerta {
+    width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.alerta.alert-success {
+    background-color: var(--mensaje-usuario-verde);
+}
+
+.alerta.alert-danger {
+    background-color: var(--mensaje-usuario-rojo);
+}
+
+.alerta.alert-warning {
+    background-color: var(--mensaje-usuario-amarillo);
 }

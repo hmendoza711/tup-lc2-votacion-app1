@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" type="image/png" href="/img/icons/favicon-16x16.png">
 	<!-- Estilos CSS -->
 	<link rel="stylesheet" href="/css/common.css" />
-	<link rel="stylesheet" href="/css/pages/generales.css" />
+	<link rel="stylesheet" href="/css/pages/paso.css" />
 	<!-- BootStrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -29,43 +29,49 @@
 			<div class="container-fluid d-flex justify-content-start align-items-center">
 				<ul class="nav">
 					<li>
-						<select name="año desplegado" id="año">
+						<select class="desplegado" name="año" id="año">
 							<option value="#">Año</option>
 						</select>
 					</li>
 					<li>
-						<select name="cargo desplegado" id="cargo">
+						<select class="desplegado" name="cargo" id="cargo">
 							<option value="#">Cargo</option>
 						</select>
 					</li>
 					<li>
-						<select name="distrito desplegado" id="distrito">
+						<select class="desplegado" name="distrito" id="distrito">
 							<option value="#">Distrito</option>
 						</select>
 					</li>
 					<li>
-						<a class="menu-boton filtrar" id="filtrar" style="background-color: white">
-							<i class="fas fa-search"></i> Filtrar
+						<a class="btn-menu filtrar" id="filtrar"">
+							<i class=" fas fa-search"></i> Filtrar
 						</a>
 					</li>
+					<li><a class="btn-generales btn-menu" href="/generales.html">GENERALES</a></li>
 					<li><a class="btn-menu" href="/informes.html">INFORMES</a></li>
 				</ul>
 				<ul class="nav ms-auto"> <!-- ms-auto para alinear a la derecha INICIO -->
-					<li><a class="active" href="/index.html">INICIO</a></li>
+					<li><a class="btn-menu inicio" href="/index.html">INICIO</a></li>
 				</ul>
 			</div>
 		</div>
 	</header>
 	<!-- Contenido principal de la página -->
 	<main>
-		<section id="sec-titulo">
-			<!--Seccion para agregar una palicula favorita por codigo-->
-			<h2>Elecciones 2021 | Generales</h2>
-			<p>Párrafo o subtítulo</p>
-			<div>Imagen</div>
-		</section>
 		<section id="sec-messages">
 			<!--Seccion para contenido de la página-->
+			<div class="alerta alert-success" id="mensaje-verde">
+				Se agregó con éxito el resultado al informe.
+			</div>
+			<div class="alerta alert-danger" id="mensaje-rojo">
+				Error: se produjo un error al intentar agregar resultados al
+				informe.
+			</div>
+			<div class="alerta alert-warning" id="mensaje-amarillo">
+				La operación no se pudo completar.
+			</div>
+		</section>
 		</section>
 		<section id="sec-contenido">
 			<!--Seccion para contenido de la página-->
