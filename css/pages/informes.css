@@ -23,7 +23,7 @@
     border-bottom: 1px solid var(--borde-inferior-Grilla);
 }
 
-/* Estilos del cuerpo (TBODY) */
+/* tbody */
 .grilla tbody tr:hover {
     background-color: rgb(250, 250, 250);
 }
@@ -36,3 +36,74 @@
     vertical-align: top;
     text-align: center;
 }
+
+/* Elcciones texto  */
+.texto-elecciones-chico {
+    font-size: 12px;
+    color: var(--textos);
+    font-weight: bold;
+    width: 18px;
+}
+
+.texto-path-chico {
+    padding-top: 10px;
+    font-size: 11px;
+    width: 18px;
+    color: var(--celeste);
+}
+
+/* Datos generales */
+.recuadro-mesas-escrutadas {
+    background-color: var(--celeste);
+    border-radius: 5px;
+    margin: 2px;
+    height: 120px;
+    width: 70px;
+    color: #FFF;
+    font-size: 10px;
+}
+
+.recuadro-electores {
+    background-color: var(--magenta);
+    border-radius: 5px;
+    margin: 2px;
+    height: 120px;
+    width: 70px;
+    color: #FFF;
+    font-size: 10px;
+}
+
+.recuadro-participacion {
+    background-color: var(--morado);
+    border-radius: 5px;
+    margin: 2px;
+    height: 120px;
+    width: 70px;
+    color: #FFF;
+    font-size: 10px;
+}
+
+/* Acomodar datos generales */
+.contenedor-recuadros {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 50px;
+}
+
+.datos-agrupacion {
+    grid: 100px 100px;
+    overflow-y: scroll;
+    height: 325px;
+    padding: 5px;
+    font-size: 10px;
+    color: var(--textos);
+}
+
+/**Acomodar datos por agrupacion**/
+.partido-interno {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+
