@@ -16,3 +16,60 @@
     transition: color 0.2s;
     color: var(--textos);
 }
+
+/* Estilos cuadros */
+.cuadros {
+    border-radius: 25px;
+    border: 1px var(--borde-Grilla) solid;
+    margin: 10px;
+    margin-bottom: 50px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    height: 500px;
+    width: 400px;
+}
+
+/* Estilos para los títulos de los cuadros */
+.titulo-cuadros {
+    font-weight: bold;
+    padding: 1.8em 0 0 0;
+    text-align: center;
+    white-space: nowrap;
+}
+/* ========================= */
+/* AGRUPACIONES POLITICAS */
+/* ========================= */
+/*desplazamiento vertical */
+.cuadro-agrupaciones {
+    overflow-y: auto;
+    height: 325px;
+}
+/* Textos Agrupaciones politicas */
+.cuadro-agrupaciones p {
+    font-size: 11px;
+    color: var(--textos);
+    padding: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+/* Estilos para el cuadro de cada Agrupacion politica */
+.agrupacion {
+    height: 325px;
+    margin-bottom: 20px;
+}
+/* Estilos para los títulos de cada Agrupación */
+.titulo-agrupaciones {
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--borde-Grilla);
+    margin: 0;
+    padding: 5px;
+}
+
+.partido {
+    height: 150px;
+}
+
+.porcentajes {
+    float: right;
+    color: var(--texto-footer);
+}
