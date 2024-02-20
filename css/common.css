@@ -227,3 +227,31 @@ main p {
 .alerta.alert-warning {
     background-color: var(--mensaje-usuario-amarillo);
 }
+
+/* Mesas Escrutadas - Electores - Part. sobre escrutado */
+
+.recuadros-informacion {
+    border-radius: 10px;
+    margin: 10px;
+    height: 80px;
+    width: 250px;
+    padding: 2px;
+    color: #FFF;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-weight: bold;
+}
+
+#mesas-escrutadas {
+    background-color: var(--celeste);
+}
+
+#electores {
+    background-color: var(--magenta);
+}
+
+#participacion-escrutado {
+    background-color: var(--morado);
+}

@@ -1,0 +1,12 @@
+/* boton + AGREGAR A INFORME */
+
+.agregar-informe {
+    background-color: var(--gris-claro);
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    padding: 5px;
+    margin: 15px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
