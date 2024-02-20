@@ -1,0 +1,38 @@
+/* Grilla estilos */
+.grilla {
+    width: 1024px;
+    margin: 0 auto 50px auto;
+    border-radius: 15px;
+    border: 1px solid var(--borde-Grilla);
+    border-collapse: collapse;
+    background-color: rgb(250, 250, 250);
+}
+
+/* THEADER */
+.grilla thead {
+    text-align: center;
+    color: var(--titulo-Grilla);
+}
+
+.grilla thead th {
+    color: var(--titulo-Grilla);
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--borde-inferior-Grilla);
+}
+
+/* Estilos del cuerpo (TBODY) */
+.grilla tbody tr:hover {
+    background-color: rgb(250, 250, 250);
+}
+
+.grilla tbody td {
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid var(--borde-inferior-Grilla);
+    padding: 15px 0;
+    font-size: 12px;
+    vertical-align: top;
+    text-align: center;
+}
