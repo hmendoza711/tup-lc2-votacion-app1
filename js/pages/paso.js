@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarMensajes(msjAmarillo, "Seleccionar valores de Año, Cargo, Distrito y Sección para FILTRAR");
 });
 document.addEventListener('DOMContentLoaded', consultarAños);
-selectYear.addEventListener('change', consultarDatos);
+selectYear.addEventListener('change', consultarCargo);
 
 // FUNCIONES PARA OCULTAR Y MOSTRAR MENSAJES
 function ocultarMensajes() {
@@ -69,7 +69,14 @@ function mostrarMensajes(tipoMensaje, mensaje,) {
     }, 5000);
 };
 
-//FUNCION PARA CONSULTAR AÑOS
+// LIMPIAR SELECTS
+function limpiarSelect(select) {
+    while (select.options.length > 1) {
+        select.remove(1);
+    }
+};
+
+//FUNCION PARA CONSULTAR AÑOS.
 async function consultarAños() {
     const url = `https://resultados.mininterior.gob.ar/api/menu/periodos`;
     try {
@@ -77,10 +84,10 @@ async function consultarAños() {
         console.log(response.ok);
         if (response.ok) {
             const años = await response.json();
-            años.forEach((item) => {
+            años.forEach((años) => {
                 const option = document.createElement('option');
-                option.value = item;
-                option.text = item;
+                option.value = años;
+                option.text = años;
                 selectYear.appendChild(option);
             });
         } else {
@@ -89,26 +96,25 @@ async function consultarAños() {
     }
     catch (errorObj) {
         ocultarMensajes();
-        mostrarMensaje(msjRojo, "Error!!");
+        mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
         setInterval(function () {
             msjRojo.style.visibility = 'visible'
-        }, 5000); 
+        }, 5000);
     }
 };
 
-// FUNCION PARA CONSULTAR CARGOS
-async function consultarDatos() {
-    selectedYear = selectYear.options[selectedYear.selectedIndex].textContent;
+// FUNCION PARA CONSULTAR CARGOS.
+async function consultarCargo() {
+    selectedYear = selectYear.options[selectYear.selectedIndex].textContent;
     const url = "https://resultados.mininterior.gob.ar/api/menu?año=";
     try {
-        const response = await fetch(url + selectedYear.value);
+        const response = await fetch(url + selectYear.value);
         console.log(response.ok);
         if (response.ok) {
             limpiarSelect(selectCargo);
             limpiarSelect(selectDistrito);
             limpiarSelect(selectSeccion);
-
-            datosElecciones = await response.json();
+            const datosElecciones = await response.json();
             datosElecciones.forEach((eleccion) => {
                 if (eleccion.IdEleccion == tipoEleccion) {
                     eleccion.Cargos.forEach((cargo) => {
@@ -118,17 +124,12 @@ async function consultarDatos() {
                         selectCargo.appendChild(option);
                     });
                 }
-
             });
         } else {
             mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
         }
     }
-    catch (err) {
-        mostrarMensaje(msjRojo, "Error!!");
+    catch (errorObj) {
+        mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
     }
 };
-
-
-
-
