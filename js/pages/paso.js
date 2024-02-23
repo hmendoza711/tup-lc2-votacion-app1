@@ -86,15 +86,17 @@ function mostrarMensaje(tipoMensaje, mensaje,) {
 //CARTELES PARA CAMPOS INCOMPLETOS.
 function camposVacios() {
     if (selectYear.value == 'none') {
-        mostrarMensaje(msjAmarillo, 'Por favor complete los campos de año, cargo, distrito y seccion antes de filtrar');
+        mostrarMensaje(msjAmarillo, 'Complete campos de AÑO, CARGO, DISTRITO y SECCION');
     } else if (selectCargo.value == 'none') {
-        mostrarMensaje(msjAmarillo, 'Por favor complete los campos de cargo, distrito y seccion antes de filtrar');
+        mostrarMensaje(msjAmarillo, 'Complete campos de CARGO, DISTRITO y SECCION');
     } else if (selectDistrito.value == 'none') {
-        mostrarMensaje(msjAmarillo, 'Por favor complete los campos de distrito y seccion antes de filtrar');
+        mostrarMensaje(msjAmarillo, 'Complete campos de DISTRITO y SECCION');
     } else {
-        mostrarMensaje(msjAmarillo, 'Por favor complete el campos de seccion antes de filtrar');
-    };
+        mostrarMensaje(msjAmarillo, 'Complete campo de SECCION');
+    }
 };
+
+
 
 // LIMPIAR SELECTS
 function limpiarSelect(select) {
@@ -129,7 +131,6 @@ async function consultarAños() {
         }, 5000);
     }
 };
-
 // FUNCION PARA CONSULTAR CARGOS.
 async function consultarCargo() {
     selectedYear = selectYear.options[selectYear.selectedIndex].textContent;
@@ -212,6 +213,7 @@ function cargarSeccion() {
 
 //FUNCION PARA FILTRAR RESULTADOS.
 async function filtrarResultados() {
+
     if (validarSelects()) {
         ocultarMensajes();
         const url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados`;
@@ -236,21 +238,21 @@ async function filtrarResultados() {
                 cuadroElectores.textContent = `${resultados.estadoRecuento.cantidadElectores}`;
                 cuadroParticipacion.textContent = `${resultados.estadoRecuento.participacionPorcentaje}%`;
                 cambiarMapas();
-            } else {
-                mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
+            }else{
+                mostrarMensaje(msjRojo, "Error, el servidor seEBA encuentra fuera de servicio!");
             }
         }
         catch (errorObj) {
             mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
-        }
-    } else {
+        };
+    }else{
         camposVacios();
-    }
+    };
 };
 
 // FUNCION PARA VALIDAR LOS SELECTS.
 function validarSelects() {
-    return (!(selectYear.value === 'none') && !(selectCargo.value === 'none') && !(selectDistrito.value === 'none') && !(selectSeccion.value === 'none'));
+    return selectYear.value !== 'none' && selectCargo.value !== 'none' && selectDistrito.value !== 'none' && selectSeccion.value !== 'none'
 };
 
 // FUNCION PARA MOSTRAR TITULO Y SUBTITULO.
@@ -280,7 +282,7 @@ function cambiarMapas() {
         svgContainer.appendChild(tituloProvincia);
         svgContainer.appendChild(divSvg);
     } else {
-        svgContainer.innerHTML = "<p>Nos se puede cargar la imagen.</p>";
+        svgContainer.innerHTML = "<h3>Provincia</h3>";
     }
 };
 

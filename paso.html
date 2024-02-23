@@ -32,23 +32,23 @@
 				<ul class="nav">
 					<li>
 						<select class="desplegado" name="year" id="comboYear">
-							<option value="year">Año</option>
+							<option value="none">Año</option>
 						</select>
 					</li>
 					<li>
 						<select class="desplegado" name="cargo" id="comboCargo">
-							<option value="cargo">Cargo</option>
+							<option value="none">Cargo</option>
 						</select>
 					</li>
 					<li>
 						<select class="desplegado" name="distrito" id="comboDistrito">
-							<option value="distrito">Distrito</option>
+							<option value="none">Distrito</option>
 						</select>
 					</li>
 					<input type="hidden" id="hdSeccionProvincial" name="hdSeccionProvincial">
 					<li>
 						<select class="desplegado" name="seccion" id="comboSeccion">
-							<option value="seccion">Sección</option>
+							<option value="none">Sección</option>
 						</select>
 					</li>
 					<li>
@@ -297,10 +297,9 @@
 						<h3 class="titulo-cuadros titulo-provincias">Provincia</h3>
 					</div>
 					<div class="col cuadros">
-						<h3 class="titulo-cuadros titulo-resumen"></h3>
+						<h3 class="titulo-cuadros titulo-resumen">Resumen de votos</h3>
 						<div class="chart-wrap horizontal">
-							<div class="title">Resumen de votos</div>
-							<div class="grid" id="cuadro-resumen">
+							<div id="cuadro-resumen">
 							</div>
 						</div>
 					</div>
