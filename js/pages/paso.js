@@ -28,6 +28,8 @@ let selectedDistrito = "";
 let selectedSeccion = "";
 let datosElecciones;
 
+let nuevoInforme;
+
 let agrupacionesYColores = {};
 
 let coloresGraficaPlenos = [
@@ -50,6 +52,7 @@ let coloresGraficaLivianos = [
     getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro')
 ]
 
+//EVENTOS.
 document.addEventListener('DOMContentLoaded', () => {
     mostrarMensaje(msjAmarillo, "“Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR”");
 });
@@ -61,6 +64,7 @@ selectSeccion.addEventListener('change', () => {
     selectedSeccion = selectSeccion.options[selectSeccion.selectedIndex].textContent;
 });
 btnFiltrar.addEventListener('click', filtrarResultados);
+btnAgrInforme.addEventListener('click', agregarInforme);
 
 // FUNCIONES PARA OCULTAR Y MOSTRAR MENSAJES
 function ocultarMensajes() {
@@ -280,7 +284,35 @@ function cambiarMapas() {
     }
 };
 
+//LIMPIAR ELEMENTOS.
+function limpiarElemento(element) {
+    element.innerHTML = "";
+};
 
+function agregarInforme() {
+    let vAnio = selectYear.value;
+    let vTipoRecuento = tipoRecuento;
+    let vTipoEleccion = tipoEleccion;
+    let vCategoriaId = selectCargo.value;
+    let vDistrito = selectDistrito.value;
+    let vSeccionProvincial = 0;
+    let seccionId = selectSeccion.value;
+    let circuitoId = "";
+    let mesaId = "";
 
+    nuevoInforme = `${vAnio}|${vTipoRecuento}|${vTipoEleccion}|${vCategoriaId}|${vDistrito}|${vSeccionProvincial}|${seccionId}|${circuitoId}|${mesaId}|${selectedYear}|${selectedCargo}|${selectedDistrito}|${selectedSeccion}`;
 
+    let informes = [];
 
+    if (localStorage.getItem('INFORMES')) {
+        informes = JSON.parse(localStorage.getItem('INFORMES'));
+    };
+
+    if (informes.includes(nuevoInforme)) {
+        mostrarMensaje(msjAmarillo, "El informe ya se encuentra añadido.");
+    } else {
+        informes.push(nuevoInforme);
+        localStorage.setItem('INFORMES', JSON.stringify(informes));
+        mostrarMensaje(msjVerde, "Informe agregado con éxito");
+    };
+};
