@@ -51,7 +51,7 @@ let coloresGraficaLivianos = [
 ]
 
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarMensajes(msjAmarillo, "“Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR”");
+    mostrarMensaje(msjAmarillo, "“Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR”");
 });
 document.addEventListener('DOMContentLoaded', consultarAños);
 selectYear.addEventListener('change', consultarCargo);
@@ -70,7 +70,7 @@ function ocultarMensajes() {
     msjVerde.style.visibility = 'hidden';
 };
 
-function mostrarMensajes(tipoMensaje, mensaje,) {
+function mostrarMensaje(tipoMensaje, mensaje,) {
     ocultarMensajes();
     tipoMensaje.textContent = mensaje
     tipoMensaje.style.visibility = 'visible';
@@ -222,15 +222,16 @@ async function filtrarResultados() {
         try {
             cartelCargando.style.visibility = 'visible';
             const response = await fetch(url + parametros);
+            console.log(response.ok);
             if (response.ok) {
                 cartelCargando.style.visibility = 'hidden';
                 resultados = await response.json();
-                console.log(resultados)
+                console.log(resultados);
                 mostrarTitulos();
                 cuadroEscrutadas.textContent = `${resultados.estadoRecuento.mesasTotalizadas}`;
                 cuadroElectores.textContent = `${resultados.estadoRecuento.cantidadElectores}`;
                 cuadroParticipacion.textContent = `${resultados.estadoRecuento.participacionPorcentaje}%`;
-
+                cambiarMapas();
             } else {
                 mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
             }
@@ -252,7 +253,6 @@ function validarSelects() {
 function mostrarTitulos() {
     titulo.textContent = `Elecciones ${selectYear.value} | Paso`
     subtitulo.textContent = subtitulo.textContent = `${selectYear.options[selectYear.selectedIndex].textContent} > Paso > ${selectCargo.options[selectCargo.selectedIndex].textContent} > ${selectDistrito.options[selectDistrito.selectedIndex].textContent} > ${selectSeccion.options[selectSeccion.selectedIndex].textContent}`;
-
     titulo.style.visibility = 'visible';
     subtitulo.style.visibility = 'visible';
 };
@@ -265,15 +265,15 @@ function cambiarMapas() {
     const provincia = provinciasSVG.find((item) => item.provincia.toUpperCase() === selectedDistrito.toUpperCase());
 
     if (provincia) {
-        const h3Provincia = document.createElement('h3');
-        h3Provincia.textContent = provincia.provincia; 
-        h3Provincia.classList.add('titulo-cuadros', 'titulo-provincias');
+        const tituloProvincia = document.createElement('h4');
+        tituloProvincia.textContent = provincia.provincia; 
+        tituloProvincia.classList.add('titulo-cuadros', 'titulo-provincias');
 
         const divSvg = document.createElement('div');
         divSvg.innerHTML = provincia.svg;
         divSvg.classList.add('cuadro-provincias');
 
-        svgContainer.appendChild(h3Provincia);
+        svgContainer.appendChild(tituloProvincia);
         svgContainer.appendChild(divSvg);
     } else {
         svgContainer.innerHTML = "<p>Nos se puede cargar la imagen.</p>";
@@ -281,10 +281,6 @@ function cambiarMapas() {
 };
 
 
-function limpiarElemento(element) {
-    while (element.firstChild) {
-        element.removeChild(element.firstChild);
-    }
-};
+
 
 

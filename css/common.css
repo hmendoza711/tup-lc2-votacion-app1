@@ -194,9 +194,9 @@ main p {
 .desplegado {
     background: transparent;
     border: none;
-    font-size: 14px;
+    font-size: 10px;
     height: 30px;
-    width: 200px;
+    width: 130px;
     padding: 5px;
     color: var(--celeste);
     font-weight: bold;
