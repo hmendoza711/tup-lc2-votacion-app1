@@ -213,7 +213,6 @@ function cargarSeccion() {
 
 //FUNCION PARA FILTRAR RESULTADOS.
 async function filtrarResultados() {
-
     if (validarSelects()) {
         ocultarMensajes();
         const url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados`;
@@ -229,6 +228,7 @@ async function filtrarResultados() {
             cartelCargando.style.visibility = 'visible';
             const response = await fetch(url + parametros);
             console.log(response.ok);
+
             if (response.ok) {
                 cartelCargando.style.visibility = 'hidden';
                 resultados = await response.json();
@@ -238,14 +238,16 @@ async function filtrarResultados() {
                 cuadroElectores.textContent = `${resultados.estadoRecuento.cantidadElectores}`;
                 cuadroParticipacion.textContent = `${resultados.estadoRecuento.participacionPorcentaje}%`;
                 cambiarMapas();
-            }else{
-                mostrarMensaje(msjRojo, "Error, el servidor seEBA encuentra fuera de servicio!");
+                cuadroAgrupPoliticas();
+                mostrarContenido();
+            } else {
+                mostrarMensaje(msjRojo, "Error, el servidor sssse encuentra fuera de servicio!");
             }
         }
         catch (errorObj) {
-            mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
+            mostrarMensaje(msjRojo, "Error, el servdddddidor se encuentra fuera de servicio!");
         };
-    }else{
+    } else {
         camposVacios();
     };
 };
@@ -265,14 +267,14 @@ function mostrarTitulos() {
 
 //FUNCION CAMBIAR MAPAS.
 function cambiarMapas() {
-    
+
     limpiarElemento(svgContainer);
 
     const provincia = provinciasSVG.find((item) => item.provincia.toUpperCase() === selectedDistrito.toUpperCase());
 
     if (provincia) {
-        const tituloProvincia = document.createElement('h4');
-        tituloProvincia.textContent = provincia.provincia; 
+        const tituloProvincia = document.createElement('h3');
+        tituloProvincia.textContent = provincia.provincia;
         tituloProvincia.classList.add('titulo-cuadros', 'titulo-provincias');
 
         const divSvg = document.createElement('div');
@@ -291,6 +293,7 @@ function limpiarElemento(element) {
     element.innerHTML = "";
 };
 
+// +AGREGAR INFORMES
 function agregarInforme() {
     let vAnio = selectYear.value;
     let vTipoRecuento = tipoRecuento;
@@ -317,4 +320,37 @@ function agregarInforme() {
         localStorage.setItem('INFORMES', JSON.stringify(informes));
         mostrarMensaje(msjVerde, "Informe agregado con éxito");
     };
+};
+
+function cuadroAgrupPoliticas() {
+    console.log(resultados.valoresTotalizadosPositivos);
+    let agrupaciones = resultados.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
+
+
+    if (agrupaciones) {
+        
+        agrupaciones.forEach(agrupacion => {
+
+            const divAgrupacion = document.createElement('div');
+            divAgrupacion.classList.add('cuadro-agrupaciones');
+
+            const tituloAgrupaciones = document.createElement('h4');
+            tituloAgrupaciones.classList.add('cuadro-agrupaciones');
+
+            tituloAgrupaciones.textContent = agrupacion.nombreAgrupacion;
+
+            divAgrupacion.appendChild(tituloAgrupaciones);
+            let partidos = agrupacion.listas;
+
+            cuadroAgrupaciones.appendChild(divAgrupacion);
+        });
+    };
+};
+
+function removerHijos(element) {
+    element.innerHTML = "";
+};
+
+function mostrarContenido() {
+    secContenido.style.visibility = 'visible';
 };
