@@ -323,7 +323,9 @@ function agregarInforme() {
 };
 
 function cuadroAgrupPoliticas() {
+    
     console.log(resultados.valoresTotalizadosPositivos);
+
     let agrupaciones = resultados.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
 
 
@@ -332,17 +334,33 @@ function cuadroAgrupPoliticas() {
         agrupaciones.forEach(agrupacion => {
 
             const divAgrupacion = document.createElement('div');
-            divAgrupacion.classList.add('cuadro-agrupaciones');
+            divAgrupacion.classList.add('nombre-agrupaciones');
 
             const tituloAgrupaciones = document.createElement('h4');
-            tituloAgrupaciones.classList.add('cuadro-agrupaciones');
-
-            tituloAgrupaciones.textContent = agrupacion.nombreAgrupacion;
-
+            tituloAgrupaciones.classList.add('titulo-agrupaciones');
             divAgrupacion.appendChild(tituloAgrupaciones);
-            let partidos = agrupacion.listas;
+            
+            
+            cuadroAgrupaciones.appendChild(divAgrupacion); //Agrega div nombre-agrupaciones y h4 titulo-agrupaciones a id cuadroAgrupaciones.
+            
+            let listaPartidos = agrupacion.listas;
+            
+            if (listaPartidos) {
+                listaPartidos.forEach(partido =>{
+                    
+                    const divPartido = document.createElement('div');
+                    divPartido.classList.add('partido');
 
-            cuadroAgrupaciones.appendChild(divAgrupacion);
+                    const nombrePartido = document.createElement('p');
+                    nombrePartido.classList.add('nombre-partido');
+                    nombrePartido.textContent = partido.nombre;
+                    divPartido.appendChild(nombrePartido);
+
+                    divAgrupacion.appendChild(divPartido);
+
+                });
+            };
+            tituloAgrupaciones.textContent = agrupacion.nombreAgrupacion;
         });
     };
 };
