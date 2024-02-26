@@ -336,7 +336,7 @@ function cuadroAgrupPoliticas() {
             const divAgrupacion = document.createElement('div');
             divAgrupacion.classList.add('nombre-agrupaciones');
 
-            const tituloAgrupaciones = document.createElement('h4');
+            const tituloAgrupaciones = document.createElement('h6');
             tituloAgrupaciones.classList.add('titulo-agrupaciones');
             divAgrupacion.appendChild(tituloAgrupaciones);
             
@@ -348,15 +348,38 @@ function cuadroAgrupPoliticas() {
             if (listaPartidos) {
                 listaPartidos.forEach(partido =>{
                     
+                    //Creo <div> para el nombre del partido <p>
                     const divPartido = document.createElement('div');
                     divPartido.classList.add('partido');
+        
+                    const nombrePartido1 = document.createElement('p');
+                    nombrePartido1.textContent = partido.nombre;
+                    nombrePartido1.classList.add('nombre-partido');
+                    divPartido.appendChild(nombrePartido1);
+                    
+                    //Creo <div> para el porcentaje <span> del partido.
+                    const divPorcentajesPartido = document.createElement('div');
+                    divPorcentajesPartido.classList.add('porcentajes-partido');
 
-                    const nombrePartido = document.createElement('p');
-                    nombrePartido.classList.add('nombre-partido');
-                    nombrePartido.textContent = partido.nombre;
-                    divPartido.appendChild(nombrePartido);
+                    const spanPartidoPorcentajes = document.createElement('span');
+                    const porcentajeVotos = `${(partido.votos * 100 / agrupacion.votos).toFixed(2)}%`;
+                    spanPartidoPorcentajes.textContent = porcentajeVotos;
+                    spanPartidoPorcentajes.classList.add('porcentajes-partido');
+                    divPorcentajesPartido.appendChild(spanPartidoPorcentajes);
+
+                    //Creo <div> para la cantidad de votos del partido.
+                    const divVotosPartido = document.createElement('div');
+                    divVotosPartido.classList.add('votos-partidos');
+
+                    const spanPartidoVotos = document.createElement('span');
+                    spanPartidoVotos.textContent = `${partido.votos} - Votos`;
+                    spanPartidoVotos.classList.add('votos-partidos');
+                    divVotosPartido.appendChild(spanPartidoVotos);
 
                     divAgrupacion.appendChild(divPartido);
+                    divAgrupacion.appendChild(divPorcentajesPartido);
+                    divAgrupacion.appendChild(divVotosPartido);
+
 
                 });
             };
