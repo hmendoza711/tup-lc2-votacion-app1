@@ -30,27 +30,38 @@ let datosElecciones;
 
 let nuevoInforme;
 
-let agrupacionesYColores = {};
 
-let coloresGraficaPlenos = [
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris')
-]
+const graficaAmarillo = getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo');
+const graficaAmarilloClaro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro');
+const graficaCeleste = getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste');
+const graficaCelesteClaro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste-claro');
+const graficaBordo = getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo');
+const graficaBordoClaro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro');
+const graficaLila = getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila');
+const graficaLilaClaro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro');
+const graficaLila2 = getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2');
+const graficaLila2Claro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2-claro');
+const graficaGris = getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris');
+const graficaGrisClaro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro');
+const graficaVerde = getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde');
+const graficaVerdeClaro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro');
 
-let coloresGraficaLivianos = [
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste-claro'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2-claro'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro'),
-    getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro')
-]
+
+// Ahora puedes usar estas variables en tu código JavaScript
+
+const agrupacionesYColores = {
+    0: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro') },
+    1: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste-claro') },
+    2: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro') },
+    3: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro') },
+    4: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2-claro') },
+    5: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro') },
+    6: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro') },
+    7: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro') },
+    8: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro') },
+    9: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro') },
+    10: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro') },
+};
 
 //EVENTOS.
 document.addEventListener('DOMContentLoaded', () => {
@@ -323,14 +334,14 @@ function agregarInforme() {
 };
 
 function cuadroAgrupPoliticas() {
-    
+
     console.log(resultados.valoresTotalizadosPositivos);
 
     let agrupaciones = resultados.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
 
 
     if (agrupaciones) {
-        
+
         agrupaciones.forEach(agrupacion => {
 
             const divAgrupacion = document.createElement('div');
@@ -339,25 +350,25 @@ function cuadroAgrupPoliticas() {
             const tituloAgrupaciones = document.createElement('h6');
             tituloAgrupaciones.classList.add('titulo-agrupaciones');
             divAgrupacion.appendChild(tituloAgrupaciones);
-            
-            
+
+
             cuadroAgrupaciones.appendChild(divAgrupacion); //Agrega div nombre-agrupaciones y h4 titulo-agrupaciones a id cuadroAgrupaciones.
-            
+
             let listaPartidos = agrupacion.listas;
-            
+
             if (listaPartidos) {
-                listaPartidos.forEach(partido =>{
-                    
-                    //Creo <div> para el nombre del partido <p>
+                listaPartidos.forEach(partido => {
+
+                    //Creo <divPartido> para el nombre del partido <p>
                     const divPartido = document.createElement('div');
                     divPartido.classList.add('partido');
-        
+
                     const nombrePartido1 = document.createElement('p');
                     nombrePartido1.textContent = partido.nombre;
                     nombrePartido1.classList.add('nombre-partido');
                     divPartido.appendChild(nombrePartido1);
-                    
-                    //Creo <div> para el porcentaje <span> del partido.
+
+                    //Creo <divPorcentajesPartido> para el porcentaje <span> del partido.
                     const divPorcentajesPartido = document.createElement('div');
                     divPorcentajesPartido.classList.add('porcentajes-partido');
 
@@ -367,7 +378,7 @@ function cuadroAgrupPoliticas() {
                     spanPartidoPorcentajes.classList.add('porcentajes-partido');
                     divPorcentajesPartido.appendChild(spanPartidoPorcentajes);
 
-                    //Creo <div> para la cantidad de votos del partido.
+                    //Creo <divVotosPartido> para la cantidad de votos del partido.
                     const divVotosPartido = document.createElement('div');
                     divVotosPartido.classList.add('votos-partidos');
 
@@ -376,9 +387,24 @@ function cuadroAgrupPoliticas() {
                     spanPartidoVotos.classList.add('votos-partidos');
                     divVotosPartido.appendChild(spanPartidoVotos);
 
+                    //Creo <div> para la barra.
+                    const divBarra = document.createElement('div');
+                    divBarra.classList.add('progress');
+                    const idAgrupaciones = agrupaciones.findIndex(agrupacion => parseInt(agrupacion.idAgrupacion, 10));
+                    console.log(idAgrupaciones);
+                    divBarra.style.backgroundColor = agrupacionesYColores[idAgrupaciones].claro;
+
+                    const divProgresoBarra = document.createElement('div');
+                    divProgresoBarra.classList.add('progress-bar');
+                    divProgresoBarra.style.background = agrupacionesYColores[idAgrupaciones].oscuro;
+                    divProgresoBarra.style.width = porcentajeVotos;
+                    divBarra.appendChild(divProgresoBarra);
+
+                    //appendChild
                     divAgrupacion.appendChild(divPartido);
                     divAgrupacion.appendChild(divPorcentajesPartido);
                     divAgrupacion.appendChild(divVotosPartido);
+                    divAgrupacion.appendChild(divBarra);
 
 
                 });
@@ -387,6 +413,29 @@ function cuadroAgrupPoliticas() {
         });
     };
 };
+
+function listaAgrupacionesYColores() {
+    let agrupaciones = resultados.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
+    let cont = 0
+    agrupaciones.forEach(agrupacion => {
+        let idAgrupaciones = agrupacion.idAgrupacion
+
+        if (cont < 6) {
+            agrupacionesYColores[idAgrupaciones] = {
+                oscuro: coloresGraficaPlenos[cont],
+                claro: coloresGraficaLivianos[cont]
+            };
+            cont++;
+        } else {
+            agrupacionesYColores[idAgrupaciones] = {
+                claro: coloresGraficaPlenos[cont],
+                oscuro: coloresGraficaLivianos[cont]
+            };
+        }
+    })
+}
+
+
 
 function removerHijos(element) {
     element.innerHTML = "";
