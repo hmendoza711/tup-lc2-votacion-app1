@@ -261,6 +261,7 @@ async function filtrarResultados() {
     } else {
         camposVacios();
     };
+    resumenVotos();
 };
 
 // FUNCION PARA VALIDAR LOS SELECTS.
@@ -346,14 +347,16 @@ function cuadroAgrupPoliticas() {
 
             const divAgrupacion = document.createElement('div');
             divAgrupacion.classList.add('nombre-agrupaciones');
+            const lineaSeparadora = document.createElement('hr');
+            lineaSeparadora.classList.add('linea-separadora');
+            divAgrupacion.appendChild(lineaSeparadora);
 
-            const tituloAgrupaciones = document.createElement('h6');
+            const tituloAgrupaciones = document.createElement('h4');
             tituloAgrupaciones.classList.add('titulo-agrupaciones');
             divAgrupacion.appendChild(tituloAgrupaciones);
 
 
-            cuadroAgrupaciones.appendChild(divAgrupacion); //Agrega div nombre-agrupaciones y h4 titulo-agrupaciones a id cuadroAgrupaciones.
-
+            cuadroAgrupaciones.appendChild(divAgrupacion);
             let listaPartidos = agrupacion.listas;
 
             if (listaPartidos) {
@@ -387,17 +390,24 @@ function cuadroAgrupPoliticas() {
                     spanPartidoVotos.classList.add('votos-partidos');
                     divVotosPartido.appendChild(spanPartidoVotos);
 
-                    //Creo <div> para la barra.
+                    //Creo <div> para la barra. 
                     const divBarra = document.createElement('div');
                     divBarra.classList.add('progress');
-                    const idAgrupaciones = agrupaciones.findIndex(agrupacion => parseInt(agrupacion.idAgrupacion, 10));
-                    console.log(idAgrupaciones);
-                    divBarra.style.backgroundColor = agrupacionesYColores[idAgrupaciones].claro;
+
+                    // Index agrupacion
+                    const idAgrupacion = agrupaciones.findIndex(agrup => agrup.idAgrupacion === agrupacion.idAgrupacion);
+
+                    // Colores.
+                    const colorClaro = agrupacionesYColores[idAgrupacion].claro;
+                    const colorOscuro = agrupacionesYColores[idAgrupacion].oscuro;
+
+                    divBarra.style.backgroundColor = colorClaro;
+
 
                     const divProgresoBarra = document.createElement('div');
                     divProgresoBarra.classList.add('progress-bar');
-                    divProgresoBarra.style.background = agrupacionesYColores[idAgrupaciones].oscuro;
                     divProgresoBarra.style.width = porcentajeVotos;
+                    divProgresoBarra.style.background = colorOscuro;
                     divBarra.appendChild(divProgresoBarra);
 
                     //appendChild
@@ -406,7 +416,6 @@ function cuadroAgrupPoliticas() {
                     divAgrupacion.appendChild(divVotosPartido);
                     divAgrupacion.appendChild(divBarra);
 
-
                 });
             };
             tituloAgrupaciones.textContent = agrupacion.nombreAgrupacion;
@@ -414,26 +423,59 @@ function cuadroAgrupPoliticas() {
     };
 };
 
-function listaAgrupacionesYColores() {
+function resumenVotos() {
     let agrupaciones = resultados.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
-    let cont = 0
-    agrupaciones.forEach(agrupacion => {
-        let idAgrupaciones = agrupacion.idAgrupacion
 
-        if (cont < 6) {
-            agrupacionesYColores[idAgrupaciones] = {
-                oscuro: coloresGraficaPlenos[cont],
-                claro: coloresGraficaLivianos[cont]
-            };
-            cont++;
-        } else {
-            agrupacionesYColores[idAgrupaciones] = {
-                claro: coloresGraficaPlenos[cont],
-                oscuro: coloresGraficaLivianos[cont]
-            };
-        }
-    })
+    if (agrupaciones) {
+        // Limitar a mostrar solo las primeras 7 agrupaciones
+        agrupaciones.slice(0, 7).forEach(agrupacion => {
+            const divAgrupacion = document.createElement('div');
+            divAgrupacion.textContent = 
+            divAgrupacion.classList.add('nombre-agrupaciones');
+
+            // Crear div para el partido 
+            const divPartido = document.createElement('div');
+            divPartido.classList.add('partido');
+
+            // Crear span para porcentaje de votos
+            const spanPorcentaje = document.createElement('span');
+            const porcentajeVotos = `${(agrupacion.votosPorcentaje).toFixed(2)}%`;
+            spanPorcentaje.textContent = porcentajeVotos;
+            spanPorcentaje.classList.add('porcentaje-votos');
+            divPartido.appendChild(spanPorcentaje);
+
+            // Crear div para la barra horizontal
+            const divBarraHorizontal = document.createElement('div');
+            divBarraHorizontal.classList.add('progress');
+
+            // Crear div para la barra vertical
+            const divBarraVertical = document.createElement('div');
+            divBarraVertical.classList.add('progress');
+            divBarraVertical.style.height = porcentajeVotos;
+
+            // Index agrupacion
+            const idAgrupacion = agrupaciones.findIndex(agrup => agrup.idAgrupacion === agrupacion.idAgrupacion);
+
+            // Colores
+            const colorClaro = agrupacionesYColores[idAgrupacion].claro;
+            const colorOscuro = agrupacionesYColores[idAgrupacion].oscuro;
+
+            divBarraHorizontal.style.backgroundColor = colorClaro;
+            divBarraVertical.style.backgroundColor = colorOscuro;
+
+            // Agregar las barras al div del partido
+            divPartido.appendChild(divBarraHorizontal);
+            divPartido.appendChild(divBarraVertical);
+
+            // Agregar div del partido al div de agrupaciones
+            divAgrupacion.appendChild(divPartido);
+
+            // Agregar div de agrupaciones al contenedor
+            cuadroResVotos.appendChild(divAgrupacion);
+        });
+    }
 }
+
 
 
 
