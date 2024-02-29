@@ -31,11 +31,12 @@
 /* Estilos para los títulos de los cuadros */
 .titulo-cuadros {
     font-weight: bold;
-    padding: 1.8em 0 0 0;
+    padding: 0.8em 0 0 0; 
     text-align: center;
     white-space: nowrap;
+    height: 50px;
+    font-size: 20px;
 }
-
 /* ========================= */
 /* AGRUPACIONES POLITICAS */
 /* ========================= */
@@ -45,31 +46,6 @@
     height: 325px;
 }
 
-;
-
-/* Textos Agrupaciones politicas */
-/* .cuadro-agrupaciones p {
-    font-size: 11px;
-    color: var(--textos);
-    padding: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-} */
-
-/* Estilos para el cuadro de cada Agrupacion politica */
-/* .agrupacion {
-    height: 325px;
-    margin-bottom: 20px;
-} */
-
-/* Estilos para los títulos de cada Agrupación */
-/* .titulo-agrupaciones {
-    font-size: 12px;
-    font-weight: bold;
-    border-bottom: 1px solid var(--borde-Grilla);
-    margin: 0;
-    padding: 5px;
-} */
 
 /* ProgressBar */
 .progress {
@@ -96,14 +72,49 @@
 } */
 
 /* //CUADRO AGRUPACIONES */
-.partido {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
+
 
 .porcentajes-partido,
 .votos-partidos {
     margin-left: 235px; 
 }
 
+
+
+.progress-vertical2 {
+    position: relative; /* Asegura que los elementos respeten la posición relativa entre sí */
+    width: 50px;
+    height: 300px;
+    margin: 0;
+}
+
+
+
+.porcentaje-votos{
+    width: 100px;
+    height: 40px;
+}
+
+#cuadro-resumen {
+    width: 400px;
+    height: 400px;
+}
+
+.partido2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 50px;
+    height: 300px;
+    font-size: small;
+    margin: 1px;
+}
+
+.nombre-agrupaciones2 {
+    font-size: smaller;
+    width: 40px; 
+    writing-mode: vertical-lr; 
+    margin-top: 1px; 
+    padding: 0;
+    margin-left: 25px;
+}

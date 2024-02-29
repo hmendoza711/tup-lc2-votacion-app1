@@ -50,10 +50,10 @@ const graficaVerdeClaro = getComputedStyle(document.documentElement).getProperty
 // Ahora puedes usar estas variables en tu código JavaScript
 
 const agrupacionesYColores = {
-    0: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro') },
+    0: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro') },
     1: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste-claro') },
-    2: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro') }, 
-    3:{ oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro') },
+    2: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro') },
+    3: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro') },
     4: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2-claro') },
     5: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro') },
     6: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro') },
@@ -139,7 +139,7 @@ async function consultarAños() {
         mostrarMensaje(msjRojo, "Error, el servidor se encuentra fuera de servicio!");
         setInterval(function () {
             msjRojo.style.visibility = 'visible'
-        }, 00);
+        }, 5000);
     }
 };
 // FUNCION PARA CONSULTAR CARGOS.
@@ -346,12 +346,12 @@ function cuadroAgrupPoliticas() {
         agrupaciones.forEach(agrupacion => {
 
             const divAgrupacion = document.createElement('div');
-            divAgrupacion.classList.add('nombre-agrupaciones');
+            divAgrupacion.classList.add('nombre-agrupaciones1');
             const lineaSeparadora = document.createElement('hr');
             lineaSeparadora.classList.add('linea-separadora');
             divAgrupacion.appendChild(lineaSeparadora);
 
-            const tituloAgrupaciones = document.createElement('h6');
+            const tituloAgrupaciones = document.createElement('h4');
             tituloAgrupaciones.classList.add('titulo-agrupaciones');
             divAgrupacion.appendChild(tituloAgrupaciones);
 
@@ -364,7 +364,7 @@ function cuadroAgrupPoliticas() {
 
                     //Creo <divPartido> para el nombre del partido <p>
                     const divPartido = document.createElement('div');
-                    divPartido.classList.add('partido');
+                    divPartido.classList.add('partido1');
 
                     const nombrePartido1 = document.createElement('p');
                     nombrePartido1.textContent = partido.nombre;
@@ -393,16 +393,22 @@ function cuadroAgrupPoliticas() {
                     //Creo <div> para la barra. 
                     const divBarra = document.createElement('div');
                     divBarra.classList.add('progress');
-                    const idAgrupaciones = agrupaciones.findIndex(agrupacion => parseInt(agrupacion.idAgrupacion, 10));
-                    console.log(idAgrupaciones);
-                    divBarra.style.backgroundColor = agrupacionesYColores[idAgrupaciones].claro;
+
+                    // Index agrupacion
+                    const idAgrupacion = agrupaciones.findIndex(agrup => agrup.idAgrupacion === agrupacion.idAgrupacion);
+
+                    // Colores.
+                    const colorClaro = agrupacionesYColores[idAgrupacion].claro;
+                    const colorOscuro = agrupacionesYColores[idAgrupacion].oscuro;
+
+                    divBarra.style.backgroundColor = colorClaro;
+
 
                     const divProgresoBarra = document.createElement('div');
                     divProgresoBarra.classList.add('progress-bar');
-                    divProgresoBarra.style.background = agrupacionesYColores[idAgrupaciones].oscuro;
                     divProgresoBarra.style.width = porcentajeVotos;
+                    divProgresoBarra.style.background = colorOscuro;
                     divBarra.appendChild(divProgresoBarra);
-                    
 
                     //appendChild
                     divAgrupacion.appendChild(divPartido);
@@ -417,26 +423,62 @@ function cuadroAgrupPoliticas() {
     };
 };
 
-function listaAgrupacionesYColores() {
+function resumenVotos() {
     let agrupaciones = resultados.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
-    let cont = 0
-    agrupaciones.forEach(agrupacion => {
-        let idAgrupaciones = agrupacion.idAgrupacion
 
-        if (cont < 6) {
-            agrupacionesYColores[idAgrupaciones] = {
-                oscuro: coloresGraficaPlenos[cont],
-                claro: coloresGraficaLivianos[cont]
-            };
-            cont++;
-        } else {
-            agrupacionesYColores[idAgrupaciones] = {
-                claro: coloresGraficaPlenos[cont],
-                oscuro: coloresGraficaLivianos[cont]
-            };
-        }
-    })
+    if (agrupaciones) {
+        // Limitar a mostrar solo las primeras 7 agrupaciones
+        agrupaciones.slice(0, 1).forEach(agrupacion => {
+            const divAgrupacion = document.createElement('div');
+            divAgrupacion.classList.add('nombre-agrupaciones2');
+
+            // Crear div para el partido 
+            const divPartido = document.createElement('div');
+            divPartido.classList.add('partido2');
+            divPartido.textContent = agrupacion.nombreAgrupacion;
+
+            const contenedor = document.createElement('div');
+            contenedor.classList.add('contenedor');
+
+            // Crear span para porcentaje de votos
+            const spanPorcentaje = document.createElement('div');
+            const porcentajeVotos = `${(agrupacion.votosPorcentaje).toFixed(2)}%`;
+            spanPorcentaje.textContent = porcentajeVotos;
+            spanPorcentaje.classList.add('porcentaje-votos');
+            divPartido.appendChild(spanPorcentaje);
+
+            // Crear div para la barra horizontal
+            const divBarraHorizontal = document.createElement('div');
+            divBarraHorizontal.classList.add('progress-vertical1');
+
+            // Crear div para la barra vertical
+            const divBarraVertical = document.createElement('div');
+            divBarraVertical.classList.add('progress-vertical2');
+            divBarraVertical.style.height = porcentajeVotos;
+
+            // Index agrupacion
+            const idAgrupacion = agrupaciones.findIndex(agrup => agrup.idAgrupacion === agrupacion.idAgrupacion);
+
+            // Colores
+            const colorClaro = agrupacionesYColores[idAgrupacion].claro;
+            const colorOscuro = agrupacionesYColores[idAgrupacion].oscuro;
+
+            divBarraHorizontal.style.backgroundColor = colorClaro;
+            divBarraVertical.style.backgroundColor = colorOscuro;
+
+            // Agregar las barras al div del partido
+            divPartido.appendChild(divBarraHorizontal);
+            divPartido.appendChild(divBarraVertical);
+
+            // Agregar div del partido al div de agrupaciones
+            divAgrupacion.appendChild(divPartido);
+
+            // Agregar div de agrupaciones al contenedor
+            cuadroResVotos.appendChild(divAgrupacion);
+        });
+    }
 }
+
 
 
 
