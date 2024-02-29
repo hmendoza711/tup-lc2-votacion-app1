@@ -82,8 +82,8 @@
 
 
 .progress-vertical2 {
-    position: relative; /* Asegura que los elementos respeten la posición relativa entre sí */
-    width: 50px;
+    position: relative; 
+    width: 80px;
     height: 300px;
     margin: 0;
 }
@@ -91,13 +91,16 @@
 
 
 .porcentaje-votos{
-    width: 100px;
+    width: 150px;
     height: 40px;
 }
 
 #cuadro-resumen {
     width: 400px;
-    height: 400px;
+    height: 350px;
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto;
 }
 
 .partido2{

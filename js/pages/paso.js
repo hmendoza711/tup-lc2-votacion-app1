@@ -428,7 +428,7 @@ function resumenVotos() {
 
     if (agrupaciones) {
         // Limitar a mostrar solo las primeras 7 agrupaciones
-        agrupaciones.slice(0, 1).forEach(agrupacion => {
+        agrupaciones.slice(0, 7).forEach(agrupacion => {
             const divAgrupacion = document.createElement('div');
             divAgrupacion.classList.add('nombre-agrupaciones2');
 
