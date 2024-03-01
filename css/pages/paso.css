@@ -73,13 +73,10 @@
 
 /* //CUADRO AGRUPACIONES */
 
-
 .porcentajes-partido,
 .votos-partidos {
     margin-left: 235px; 
 }
-
-
 
 .progress-vertical2 {
     position: relative; 
@@ -87,8 +84,6 @@
     height: 300px;
     margin: 0;
 }
-
-
 
 .porcentaje-votos{
     width: 150px;

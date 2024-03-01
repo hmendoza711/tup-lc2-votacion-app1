@@ -47,7 +47,7 @@ const graficaVerde = getComputedStyle(document.documentElement).getPropertyValue
 const graficaVerdeClaro = getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro');
 
 
-// Ahora puedes usar estas variables en tu código JavaScript
+
 
 const agrupacionesYColores = {
     0: { oscuro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'), claro: getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro') },
@@ -256,7 +256,7 @@ async function filtrarResultados() {
             }
         }
         catch (errorObj) {
-            mostrarMensaje(msjRojo, "Error, el servdddddidor se encuentra fuera de servicio!");
+            console.error(errorObj);
         };
     } else {
         camposVacios();
@@ -478,9 +478,6 @@ function resumenVotos() {
         });
     }
 }
-
-
-
 
 function removerHijos(element) {
     element.innerHTML = "";
