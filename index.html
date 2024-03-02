@@ -26,7 +26,7 @@
 		<div class="container-fluid barra-menu">
 			<div class="d-flex justify-content-start align-items-center">
 				<ul class="nav">
-					<li><span style="color: white;">CONSULTAR:</span></li>
+					<li class="consultar"  style="color: white;">CONSULTAR:</li>
 					<li><a class="btn-paso btn-menu" href="/paso.html">PASO</a></li>
 					<li><a class="btn-generales btn-menu" href="/generales.html">GENERALES</a></li>
 					<li><a class="btn-menu" href="/informes.html">INFORMES</a></li>
@@ -37,11 +37,12 @@
 	<!-- Contenido principal de la página -->
 	<main>
 		<div>
+			
 			<section id="sec-titulo">
 				<!--Seccion Texto e Imagen-->
-				<h1>Resultados electorales</h1>
 				<div class="row container-fluid">
-					<div class="col-md-6">
+					<div class="col-md-6" style= "margin-top: 30px;">
+						<h1>Resultados electorales</h1>
 						<p>Texto “La Dirección Nacional Electoral y el Observatorio Político Electoral del Ministerio
 							del Interior ponen a disposición una herramienta de búsqueda avanzada y generación
 							de informes personalizados con los resultados provisionales de las elecciones
@@ -52,7 +53,7 @@
 							presentan los resultados provisionales de las elecciones provinciales y/o locales
 							realizados bajo la adhesión a ley de simultaneidad.” </p>
 					</div>
-					<div class="col-md-6 d-flex justify-content-center align-items-center">
+					<div class="col-md-6 d-flex justify-content-center align-items-center" style= "margin-top: 30px;">
 						<img src="/img/images.png" alt="Imagen electoral" id="img-data">
 					</div>
 				</div>
@@ -60,8 +61,10 @@
 			
 			<section id="sec-contenido">
 				<!--Seccion para contenido de la página-->
-				<h3>Elecciones 2021</h3>
-				<p>Seleccione el tipo de elección que quiere consultar</p>
+				<div style= "margin-top: 30px;">
+					<h3>Elecciones 2021</h3>
+					<p>Seleccione el tipo de elección que quiere consultar</p>
+				</div>
 				<div class="row container-fluid ">
 					<div class="col-md-6 btn-container mb-5">
 						<a href="/paso.html" class="btn-paso-generales btn-paso">
@@ -114,6 +117,7 @@
 	</main>
 	<!--Pie de página-->
 	<footer>
+		
 		<div class="container-fluid">
 			<div class="row ">
 				<div class="col-lg-6">

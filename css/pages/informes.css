@@ -90,6 +90,17 @@
     margin: 0 50px;
 }
 
+.datos-generales{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: space-between; 
+    margin-bottom: 80px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+
 .datos-agrupacion {
     grid: 100px 100px;
     overflow-y: scroll;

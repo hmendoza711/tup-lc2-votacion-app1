@@ -21,11 +21,6 @@
 .cuadros {
     border-radius: 25px;
     border: 1px var(--borde-Grilla) solid;
-    margin: 10px;
-    margin-bottom: 50px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    height: 500px;
-    width: 400px;
 }
 
 /* Estilos para los títulos de los cuadros */
@@ -73,6 +68,9 @@
 
 /* //CUADRO AGRUPACIONES */
 
+.col-md-4 {
+    margin-bottom: 20px; 
+}
 .porcentajes-partido,
 .votos-partidos {
     margin-left: 235px; 
@@ -95,7 +93,6 @@
     height: 350px;
     display: flex;
     flex-wrap: nowrap; 
-    overflow-x: auto;
 }
 
 .partido2{
